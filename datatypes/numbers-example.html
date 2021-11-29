@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Numbers</h2>
+
+<p>Numbers can be written with or without decimals:</p>
+<p>Max Infinity: <b id="max_infinity">temp<i>Hello</i></b></p>
+<p>Min Infinity: <b id="min_infinity">temp <i>Hello</i></b></p>
+<p>Max Safe Integer: <b id="max_integer">temp <i>Hello</i></b></p>
+<p>Min Safe Integer: <b id="min_integer">temp <i>Hello</i></b></p>
+<p>Min Safe Integer: <b id="nan">temp <i>Hello</i></b></p></br>
+
+<button onClick="changeContent()">test</button>
+<script>
+function changeContent(){
+	document.getElementById("max_infinity").innerHTML = Number.POSITIVE_INFINITY;
+	document.getElementById("min_infinity").innerHTML = Number.NEGATIVE_INFINITY;
+	document.getElementById("max_integer").innerHTML = Number.MAX_SAFE_INTEGER;
+	document.getElementById("min_integer").innerHTML = Number.MIN_SAFE_INTEGER;
+    document.getElementById("nan").innerHTML = Number('sfasadfdsas');
+    console.log('Number here:::::::'+Number.MAX_SAFE_INTEGER);
+    //Ways to declar number data type
+    const num = Number(1000);
+    const num1 = new Number(1000);
+    const num2 = 1000;
+    
+    // with var 
+    var num3 = Number(1000);
+    var num4 = new Number(1000);
+    var num5 = 1000;
+    
+    //with let 
+    let num6 = Number(1000);
+    let num7 = new Number(1000);
+    let num8 = 1000;
+    
+    alert(typeof num);
+    alert(num1.valueOf());
+
+    alert(typeof num2); // ?
+    
+    
+}
+</script>
+
+</body>
+</html>

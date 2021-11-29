@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        /* tag selector*/
+        p {
+          color: green;
+        }
+
+        /* class selector */
+        .display {
+            color: red;
+        }
+
+        /* id selector */
+        #hello-world {
+            color: orange;
+        }
+
+        
+    </style>
+    <script>
+        function displayDateTime() {
+            //TOOD: ???            
+            //console.log('id::::::');            
+            console.log(document.getElementsByClassName('display').length);            
+            //document.getElementById('date-time').innerHTML = new Date();
+            const elementsArray = document.getElementsByClassName('display');
+            for(var i=0; i< elementsArray.length;i++) {
+                console.log(elementsArray[i])
+                elementsArray[i].innerHTML = new Date();
+            }
+        }
+    </script>
+<body>
+
+<h2>JavaScript HTML Events</h2> <!-- Negative-->
+<p id="date-time" class="dateandtime" ></p> <!-- Negative -->
+<b id="date-time" class="display"></b> <br/>  <!-- Positive and selects this element push into one array-->
+<b id="date-time" class="display"></b> <br/>  <!-- Positive and selects this element push into the same array -->
+<button onClick="displayDateTime()">The time is?</button> <!-- Negative t-->
+    <!-- Search for the entire dom-->
+
+<div class="exampleDiv">  <!-- Negative -->
+    <p class="display" id="hello-world">Hello World</p>   <!-- Positive and push to the same array-->
+</div>
+</body>
+</html>

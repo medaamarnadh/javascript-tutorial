@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+<p id="demo"></p>
+
+<script>
+const numbers = ['Hemanth', 'Srishti', 'Srinidhi', 'Rohith'];
+document.getElementById("demo").innerHTML = numbers.reduceRight(myFunc);
+
+function myFunc(total, num) {
+  alert(total);
+  return total + num;
+}
+
+
+</script>
+
+</body>
+</html>

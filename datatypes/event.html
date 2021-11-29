@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <script>
+        function displayDateTime() {
+            //TOOD: ???            
+            //console.log('id::::::');
+            console.log(document.getElementById('date-time'));
+            //console.log(document.getElementsByClassName('display'));
+            document.getElementById('date-time').innerHTML = new Date();
+
+        }
+    </script>
+<body>
+
+<h2>JavaScript HTML Events</h2> <!-- Negative-->
+<p id="date-time" ></p> <!-- Positive then stop searching-->
+<b id="date-time" class="display"></b> <br/>
+<b id="date-time" class="display"></b> <br/>
+<button onClick="displayDateTime()">The time is?</button>
+
+</body>
+</html>
