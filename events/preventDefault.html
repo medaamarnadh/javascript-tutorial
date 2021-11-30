@@ -1,0 +1,28 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <p>Please click on the checkbox control.</p>
+
+        <form>
+        <label for="id-checkbox">Checkbox:</label>
+        <input type="checkbox" id="id-checkbox"/>
+        <input type="text" onKeyDown="keyDownHandler();" />
+        </form>
+
+        <div id="output-box"></div>
+        <script>
+            document.querySelector("#id-checkbox").addEventListener("click", function(event) {
+                    document.getElementById("output-box").innerHTML += "Sorry! <code>preventDefault()</code> won't let you check this!<br>";
+                    event.preventDefault();   //Prevents the default behaviour
+            }, false);
+
+            function keyDownHandler() {
+                document.getElementById("output-box").innerHTML += "Sorry! <code>preventDefault()</code> won't let you check this!<br>";
+                event.preventDefault();
+            }
+            
+        </script>
+    </body>
+</html>

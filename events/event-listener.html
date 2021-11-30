@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript addEventListener() & Property event listener</h2>
+
+<p>This example uses the addEventListener() method to attach a click event to a button.</p>
+<!-- Property event listener -->
+<button id="myBtn">Try it</button> <!-- External event listener -->
+<!-- Event property listener -->
+<button id="myBtnPropertyEvent" onClick="displayDateWithPropertyEventHandler();">Display the Date</button>
+
+<p id="demo"></p>
+
+<script>
+document.getElementById("myBtn").addEventListener("click", displayDate); //External event listener
+
+
+// We will get event object in the arguments of the function for external event listeners
+function displayDate(ev) {       
+    document.getElementById("demo").innerHTML = Date();
+    ev.target.disabled = true;
+}
+
+
+function displayDateWithPropertyEventHandler(){
+    document.getElementById("demo").innerHTML = Date();
+    event.target.disabled = true;
+}
+</script>
+
+</body>
+</html> 
