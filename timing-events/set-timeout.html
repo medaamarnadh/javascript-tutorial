@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Timing</h2>
+
+<p>Click "Try it". Wait 5 seconds, and the page will alert "Hello".</p>
+
+<button onclick="declareTimeout()">Try it</button>
+
+<script>
+
+function declareTimeout(){
+
+  setTimeout(function(){
+     alert('I am realoading.....');
+     window.location.pathname='/Users/amar/javascript-tutorial/events/event-target.html';
+  }, 5000);
+}
+
+</script>
+
+</body>
+</html>

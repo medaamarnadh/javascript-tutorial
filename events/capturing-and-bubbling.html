@@ -21,7 +21,7 @@
             console.log(elem);
             alert(elem.tagName);
           }, {capture: true});
-          //elem.addEventListener("click", e => alert(`Bubbling: ${elem.tagName}`));
+          elem.addEventListener("click", e => alert(`Bubbling: ${elem.tagName}`));
         }
       </script>
       </body>

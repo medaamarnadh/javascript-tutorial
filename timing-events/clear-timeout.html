@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Timing</h2>
+
+<p>Click "Try it". Wait 5 seconds, and the page will alert "Hello".</p>
+<h4 id="time-seconds"></h4>
+<button onclick="declareTimeout()">Try it</button>
+    <br/><br/>
+<button onClick="stopReload()">Clear Timeout</button>
+
+<script>
+let t;
+function stopReload(){
+    clearTimeout(t);
+}
+
+function declareTimeout(){
+  let time = 5;
+  t = setTimeout(function(){
+     alert('I am realoading.....');
+     window.location.pathname='/Users/amar/javascript-tutorial/events/event-target.html';
+  }, 5000);
+
+  setInterval(function(){
+    document.getElementById('time-seconds').innerHTML = --time;
+  }, 1000);
+}
+</script>
+
+</body>
+</html>
