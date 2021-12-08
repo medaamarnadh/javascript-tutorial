@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <style type="text/css">
+            #error-message {
+               color: red;
+               font-size: 15px bold; 
+            }
+        </style>
+        <script>
+            function getData(username, returnFunction){
+                //Instead of this we may have some asynchronous function 
+                fetch('https://api.github.com/users/'+username)
+                    .then(response => response.json())
+                    .then(function(response){
+                        if(response.message === 'Not Found'){
+                            returnFunction('Not Found');
+                        } else {
+                            returnFunction(null, response);
+                        }
+                    })
+            }
+            
+            function getResult(){
+                //Passing a function name differently
+                const data = getData('hemanthorwot', showData);
+            }
+            
+            
+            function showData(err, data) {
+                if (err){
+                    document.getElementById('error-message').innerHTML = err;
+                } else {
+                    document.getElementById('result').innerHTML = JSON.stringify(data, 2);
+                }
+                
+            }
+        </script>
+    </head>
+    <body>
+        <h3>Callback examples::::::::::</h3>
+        <button id="get-result-btn">Get Result</button>
+
+        <p id="result">The result will be displayed here::::::;</p>
+        <p id="error-message"></p>
+        <script>
+            document.getElementById('get-result-btn').addEventListener('click', getResult)
+        </script>
+    </body>
+</html>

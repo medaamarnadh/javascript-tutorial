@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <style type="text/css">
+            #first-result {
+                color: blue;
+                font-size: 15px;
+            }
+            #second-result {
+                color: yellow;
+                font: 15px solid;
+            }
+            #third-result {
+                color: green;
+                font: 15px solid;
+            }
+            #error-result {
+                color: red;
+                font-size: 10px;
+            }
+        </style>
+        <script>
+            function firstFunction(data, callback){
+                setTimeout(function(){
+                    callback(null, data+20);
+                },3000)
+            }
+
+            function secondFunction(data, callback) {
+                setTimeout(function(){
+                    callback(null, data*20);
+                }, 3000);
+            }
+
+            function thirdFunction(data, callback) {
+                setTimeout(function(){
+                    callback(null, data/10);
+                }, 2000);
+            }
+            function startNestedCallbacks(){
+                firstFunction(200, function(err, result){
+                    if(err) {
+                        document.getElementById('erorr-result').innerHTML = 'firstCallback '+ err;
+                    } else {
+                        document.getElementById('first-result').innerHTML = result;
+                        secondFunction(result, function(err, secondResult){
+                            if(err) {
+                                document.getElementById('erorr-result').innerHTML = 'secondCallback '+ err;
+                            } else {                                
+                                document.getElementById('second-result').innerHTML = secondResult;
+                                thirdFunction(secondResult, function(err, result){
+                                    if(err) {
+                                        document.getElementById('erorr-result').innerHTML = 'thirdCallback '+ err;
+                                    } else {
+                                        document.getElementById('third-result').innerHTML = result;
+                                    }
+                                });
+                            }
+                        });
+                    }                    
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <h3>Nested callbacks</h3>
+        <button id="try-it">Try it</button>
+        <p id="error-result"></p>
+        <p id="first-result"></p>
+        <p id="second-result"></p>
+        <p id="third-result"></p>
+        <script>
+            document.querySelector('#try-it').addEventListener('click', function(){
+                startNestedCallbacks();
+            });
+        </script>
+    </body>
+</html>

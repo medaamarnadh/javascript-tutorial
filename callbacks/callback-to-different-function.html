@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <script>
+            function getData(arg1, returnFunction){
+                //Instead of this we may have some asynchronous function      
+                alert(returnFunction.toString());
+                setTimeout(function(){
+                    returnFunction(arg1+200);
+                }, 10000);
+                //alert(' I am here.......');
+            }
+            
+            function getResult(){
+                //Passing a function name differently
+                const data = getData(20, showData);
+            }
+            
+            
+            function showData(data) {
+                document.getElementById('result').innerHTML = data;
+            }
+        </script>
+    </head>
+    <body>
+        <h3>Callback examples::::::::::</h3>
+        <button id="get-result-btn">Get Result</button>
+
+        <p id="result">The result will be displayed here::::::;</p>
+        <script>
+            document.getElementById('get-result-btn').addEventListener('click', getResult)
+        </script>
+    </body>
+</html>
