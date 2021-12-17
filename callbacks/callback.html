@@ -3,11 +3,12 @@
         <script>
             function getData(arg1, callback){
                 //Instead of this we may have some asynchronous function       
-                alert(callback.toString());         
+                alert(callback.toString());
                 setTimeout(function(){
+                    //return arg1+200;
                     callback(arg1+200);
-                }, 10000);
-                //alert(' I am here.......');
+                }, 100);
+                alert(' after timeout');
             }
             
             function getResult(){

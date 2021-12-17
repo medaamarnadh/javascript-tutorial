@@ -37,29 +37,33 @@
                 }, 2000);
             }
             function startNestedCallbacks(){
-                firstFunction(200, function(err, result){
-                    if(err) {
-                        document.getElementById('erorr-result').innerHTML = 'firstCallback '+ err;
-                    } else {
-                        document.getElementById('first-result').innerHTML = result;
-                        // Calling the second function with the result of first function
-                        secondFunction(result, function(err, secondResult){
-                            if(err) {
-                                document.getElementById('erorr-result').innerHTML = 'secondCallback '+ err;
-                            } else {            
-                                document.getElementById('second-result').innerHTML = secondResult;
-                                //Calling the third function with the result of second function
-                                thirdFunction(secondResult, function(err, result){
-                                    if(err) {
-                                        document.getElementById('erorr-result').innerHTML = 'thirdCallback '+ err;
-                                    } else {
-                                        document.getElementById('third-result').innerHTML = result;
-                                    }
-                                });
-                            }
-                        });
-                    }                    
-                });
+                firstFunction(200, displayFirstFunctionResult);
+            }
+
+            function displayFirstFunctionResult(err, result) {
+                if(err) {
+                    document.getElementById('erorr-result').innerHTML = 'firstCallback '+ err;
+                } else {
+                    document.getElementById('first-result').innerHTML = result;
+                    secondFunction(result, displaySecondFunctionResult);
+                }
+            }
+
+            function displaySecondFunctionResult(err, result) {
+                if(err) {
+                    document.getElementById('erorr-result').innerHTML = 'firstCallback '+ err;
+                } else {
+                    document.getElementById('second-result').innerHTML = result;
+                    thirdFunction(result, displayThirdFunctionResult);
+                }
+            }
+
+            function displayThirdFunctionResult(err, result) {
+                if(err) {
+                    document.getElementById('erorr-result').innerHTML = 'firstCallback '+ err;
+                } else {
+                    document.getElementById('third-result').innerHTML = result;
+                }
             }
         </script>
     </head>

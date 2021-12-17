@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <script>
+            function getData(username){
+                return new Promise(function(resolve, reject){
+
+                    fetch('https://api.github.com/users/'+username)
+                    .then(response => response.json())
+                    .then(function(response){
+                        //When profile not found: failure case / rejected 
+                        if(response.message === 'Not Found'){
+                            //Rejected
+                            reject('There is no username');
+                        //When profile found: success /fulfilled 
+                        } else {
+                            //Fulfilled
+                            resolve(response);
+                        }
+                    })
+                    .catch(function(error){
+                        reject(error);
+                    })
+                });
+            }
+            
+            function getResult(){
+                const data = getData(20).then(function(result){                    
+                    alert(result);
+                })
+                .catch(function(err){                    
+                    alert(err);
+                });
+            }            
+
+
+            function getTheGithubUsername() {      
+                event.preventDefault();
+                const username = document.getElementById('username').value;
+                const promiseResult = getData(username);
+                console.log(promiseResult);
+                promiseResult.then(function(result){
+                    alert(JSON.stringify(result));    //fulfilled state
+                })
+                .catch(err => {                    
+                    alert(err);   //Rejected state
+                })
+                .finally(function(){
+                    alert('Finally block::::::'); // Common for all states
+                })
+            }
+        </script>
+    </head>
+    <body>
+        <h3>Promise examples::::::::::</h3>
+        <br/><br/><br/>
+
+        <form onSubmit="getTheGithubUsername();">
+            <label for="username">Git Hub username</label>
+            <input type="text" id="username" name="username" />
+            <input type="submit" value="Get the User Information" />
+        </form>
+        <!-- <button onClick="getResult();">Get Result</button>--> 
+
+        <p id="result">The result will be displayed here::::::;</p>
+    </body>
+</html>

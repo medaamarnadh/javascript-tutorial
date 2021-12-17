@@ -19,24 +19,41 @@
             }
         </style>
         <script>
-            function firstFunction(data, callback){
-                setTimeout(function(){
-                    callback(null, data+20);
-                },3000)
+            function firstFunction(data){
+                return new Promise(function(resolve, reject){
+                    setTimeout(function(){
+                        try {
+                            //throw new Error('INTERNAL_SERVER_ERROR');
+                            resolve(data+20);
+                        } catch (err) {
+                            reject(err);
+                        }                        
+                    },3000);
+                })
+                
             }
 
-            function secondFunction(data, callback) {
-                setTimeout(function(){
-                    callback(null, data*20);
-                }, 3000);
+            function secondFunction(data) {
+                return new Promise(function(resolve, reject){
+                    setTimeout(function(){
+                        reject('ERROR_CASE_SECOND');    
+                        resolve(data*20);
+                        //callback(null, data*20);
+                    }, 3000);
+                })
+                
             }
 
-            function thirdFunction(data, callback) {
-                setTimeout(function(){
-                    callback(null, data/10);
-                }, 2000);
+            function thirdFunction(data) {
+                return new Promise(function(resolve, reject){
+                    setTimeout(function(){
+                        resolve(data/10);
+                    }, 2000);
+                });
             }
-            function startNestedCallbacks(){
+
+
+            /*function startNestedCallbacks(){
                 firstFunction(200, function(err, result){
                     if(err) {
                         document.getElementById('erorr-result').innerHTML = 'firstCallback '+ err;
@@ -60,6 +77,34 @@
                         });
                     }                    
                 });
+            } */
+
+            function startNestedCallbacks() {
+                firstFunction(200)
+                    .then(function(result){
+                        document.getElementById('first-result').innerHTML = result;
+                        return secondFunction(result);             
+                    })                    
+                    .then(function(result){
+                        document.getElementById('second-result').innerHTML = result;
+                        return thirdFunction(result);
+                    })
+                    .then(function(result){
+                        document.getElementById('third-result').innerHTML = result;
+                    })
+                    .catch(function(err){
+                        
+                        alert(err);
+                    });
+            }
+
+            function startNestedCallbacks() {
+                firstFunction(200)
+                    .then(secondFunction)
+                    .then(thirdFunction)
+                    .catch(function (error){
+                        
+                    })
             }
         </script>
     </head>
