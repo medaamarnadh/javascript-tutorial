@@ -56,25 +56,6 @@
                 });
             }
 
-            /*function startNestedCallbacks() {
-                firstFunction(200)
-                    .then(function(result){
-                        document.getElementById('first-result').innerHTML = result;
-                        return secondFunction(result);             
-                    })                    
-                    .then(function(result){
-                        document.getElementById('second-result').innerHTML = result;
-                        return thirdFunction(result);
-                    })
-                    .then(function(result){
-                        document.getElementById('third-result').innerHTML = result;
-                    })
-                    .catch(function(err){
-                        
-                        alert(err);
-                    });
-            } */
-
             function startNestedCallbacks() {
                 firstFunction(200)
                     .then(secondFunction)

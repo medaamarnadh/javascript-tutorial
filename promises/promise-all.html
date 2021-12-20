@@ -1,0 +1,107 @@
+<html>
+    <head>
+        <title>Promise all</title>
+        <style>
+            h4 {
+                font-style: bold;
+            }
+            h3#error {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <button onClick="runPromises();">Tryit</button>
+
+        <h4 id="first-result"></h4>
+        <br/>
+        <h4 id="second-result"></h4>
+        <br/>
+        <h4 id="third-result"></h4>
+        <h3 id="error"></h3>
+        <script>
+
+            function multiplication(n) {
+                return n*100;
+            }
+
+            function firstFunction(num){
+                return new Promise(function(resolve, reject){
+                    setTimeout(function(){
+                        resolve(multiplication(num));
+                    },4000);
+                });                
+            }
+
+            function secondFunction(num){
+                return new Promise(function(resolve, reject){
+                    setTimeout(function(){
+                        //resolve(multiplication(num));
+                        reject('Error here');
+                    }, 5000);
+                });
+                
+            }
+
+            function thirdFunction(num){
+                return new Promise(function(resolve, reject){
+                    setTimeout(function(){
+                        resolve(multiplication(num));
+                    }, 7000);
+                });
+                
+            }
+
+            function runPromises(){
+                const one = 1;
+                const two = 2;
+                const three = 3;
+
+                const onePromise = firstFunction(1);
+                const secondPromise = secondFunction(2);
+                const thirdPromise = thirdFunction(3);
+                
+                /*onePromise.then(function(result){
+                    //Fulfilled state
+                    document.getElementById('first-result').innerHTML=result;
+                }).catch(function(error){
+                    //Rejected state 
+                    //Catch block
+                });
+
+                secondPromise.then(function(result){
+                    //Fulfilled state
+                    document.getElementById('second-result').innerHTML=result;
+                }).catch(function(error){
+                    // Rejected state
+                    //Catch block
+                });
+
+                thirdPromise.then(function(result){
+                    //Fulfilled state
+                    document.getElementById('third-result').innerHTML=result;
+                }).catch(function(error){
+                    //Rejected state 
+                    //Catch block
+                }); */
+
+                Promise.all([thirdPromise, secondPromise, onePromise ])
+                    .then(function(result){
+                        document.getElementById('first-result').innerHTML=result[2];
+                        document.getElementById('second-result').innerHTML=result[1];
+                        document.getElementById('third-result').innerHTML=result[0];
+                    })
+                    .catch(function(error){
+                        document.getElementById('error').innerHTML=error;
+                    })
+
+            }
+
+            
+
+
+            
+
+        </script>
+    </body>
+</html>
