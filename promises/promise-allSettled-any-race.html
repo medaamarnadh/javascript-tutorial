@@ -1,0 +1,143 @@
+<html>
+    <head>
+        <title>Promise all</title>
+        <style>
+            h4 {
+                font-style: bold;
+            }
+            h3#error {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <button onClick="runPromises();">Tryit</button>
+
+        <h4 id="first-result" class="result"></h4>
+        <br/>
+        <h4 id="second-result" class="result"></h4>
+        <br/>
+        <h4 id="third-result" class="result"></h4>
+        <h3 id="error"></h3>
+        <script>
+
+            function multiplication(n) {
+                return n*100;
+            }
+
+            function firstFunction(username){
+                return new Promise(function(resolve, reject){
+                    fetch('https://api.github.com/users/'+username)
+                    .then(response => response.json())
+                    .then(function(response){
+                        if(response.message === 'Not Found'){
+                            reject('Not Found:::::'+username);
+                        } else {
+                            console.log(response);
+                            resolve(response);
+                        }
+                    })
+                });                
+            }
+            /*
+            function secondFunction(username){
+                return new Promise(function(resolve, reject){
+                    fetch('https://api.github.com/users/'+username)
+                    .then(response => response.json())
+                    .then(function(response){
+                        if(response.message === 'Not Found'){
+                            reject('Not Found:::::'+username);
+                        } else {
+                            resolve(response);
+                        }
+                    })
+                });
+                
+            }
+
+            function thirdFunction(username){
+                return new Promise(function(resolve, reject){
+                    fetch('https://api.github.com/users/'+username)
+                    .then(response => response.json())
+                    .then(function(response){
+                        if(response.message === 'Not Found'){
+                            reject('Not Found:::::'+username);
+                        } else {
+                            resolve(response);
+                        }
+                    })
+                });                
+            } */
+
+            function runPromises(){                
+                const arr = ['sdafasfasfdsafdsfdsada','medaamarnadh', 'hemanthorwot'];
+
+                const promises = arr.map(function(ele){
+                    return firstFunction(ele);
+                });
+                
+                /*onePromise.then(function(result){
+                    //Fulfilled state
+                    document.getElementById('first-result').innerHTML=result;
+                }).catch(function(error){
+                    //Rejected state 
+                    //Catch block
+                });
+
+                secondPromise.then(function(result){
+                    //Fulfilled state
+                    document.getElementById('second-result').innerHTML=result;
+                }).catch(function(error){
+                    // Rejected state
+                    //Catch block
+                });
+
+                thirdPromise.then(function(result){
+                    //Fulfilled state
+                    document.getElementById('third-result').innerHTML=result;
+                }).catch(function(error){
+                    //Rejected state 
+                    //Catch block
+                }); */
+                const t1 = Date.now();
+                // Promise.allSettled method
+                /*Promise.allSettled(promises)
+                    .then(function(results){
+                        //alert(Date.now()-t1);
+                        console.log(results);
+                        const eles = document.getElementsByClassName('result');
+                        results.forEach(function(result, index){
+                            eles[index].innerHTML = JSON.stringify(result.value || result.reason, null, 4);
+                        });                        
+                    })
+                    .catch(function(error){
+                        alert(Date.now()-t1);
+                        document.getElementById('error').innerHTML=error;
+                    }) */
+                    // Promise.any method example
+                    /* Promise.any(promises)
+                        .then(function(results){
+                            //alert(Date.now()-t1);
+                            console.log(results);
+                            const eles = document.getElementsByClassName('result');                            
+                            eles[0].innerHTML = JSON.stringify(results, null, 4);
+                        })
+                        .catch(function(error){
+                            alert(Date.now()-t1);
+                            document.getElementById('error').innerHTML=error;
+                        }); */
+                    // Promise.race method example
+                    Promise.race(promises)
+                        .then(function(result){
+                            console.log(result);
+                            const eles = document.getElementsByClassName('result');                            
+                            eles[0].innerHTML = JSON.stringify(result, null, 4);
+                        })
+                        .catch(function(error){
+                            alert(Date.now()-t1);
+                            document.getElementById('error').innerHTML=error;
+                        })
+            }
+        </script>
+    </body>
+</html>
