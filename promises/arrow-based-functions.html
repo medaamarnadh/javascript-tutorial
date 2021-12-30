@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Arrow based functions::::</title>
+    </head>
+    <body>
+        <button id="click-result">Get Result From Callback</button>
+        <script>
+
+            const example = {
+                text: 'The number is::::::',
+                values: [2,35,674],
+                loop () {
+                    this.values.forEach((value, index) => alert(value + '---'+ index));
+                }
+            };
+            //document.getElementById('click-result').addEventListener('click', (ev) => example.loop()); // single line arrow based function 
+            //document.getElementById('click-result').addEventListener('click', (ev) => example.loop()); // single line arrow based function 
+            document.getElementById('click-result').addEventListener('click', (ev) => {
+                example.loop();
+                console.log('Result');
+            }); // single line arrow based function 
+
+            
+
+        </script>
+    </body>
+</html>

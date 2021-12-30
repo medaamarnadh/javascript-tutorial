@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title>Async Await example</title>
+    </head>
+    <body>
+        <button id="click-result"> Click for Result</button>
+        <script>
+            /*async function sum(a, b){
+                return a + b;
+            }*/
+            /* function getGitHubProfile(username) {
+                return new Promise(function(resolve, result){
+                    fetch(`https://api.github.com/users/${username}`)
+                    .then(response => response.json())
+                    .then(result => {
+                        if(result.message === 'Not Found'){
+                            reject('Not Found:::::'+username);
+                        } else {
+                            resolve(result);
+                        }
+                    })
+                })
+                
+            }*/
+            async function getGitHubProfile(username) {
+               const response = await fetch(`https://api.github.com/users/${username}`);
+               const result = await response.json();
+               if(result.message === 'Not Found') {
+                throw new Error('Not Found:::::::'+ username);
+               } else {
+                return result;
+               }
+            }
+            document.getElementById('click-result').addEventListener('click', async function(ev){
+                try {
+                    const result = await getGitHubProfile('medaamarnaddsafsfafadsfdasasdash');
+                    alert(JSON.stringify(result))
+                } catch (err) {
+                    alert('Inside catch block');
+                    alert(err);
+                }
+                
+            });
+
+            getGitHubProfile('medaamarnadh').then(function(result){
+                alert(JSON.stringify(result));
+            }).catch(function(err){
+                alert(err);
+            });          
+        </script>
+    </body>
+</html>
